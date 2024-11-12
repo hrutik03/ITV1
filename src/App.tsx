@@ -60,7 +60,6 @@ const TableColumns: ColumnDef<PreviewTradeDto>[] = [
 ];
 
 function App() {
-  const [pageNumber, setPageNumber] = useState(0);
   const [apiData, setApiData] = useState<FinalPreviewSubmitType>();
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
@@ -68,6 +67,7 @@ function App() {
   const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
   const [globalFilter, setGlobalFilter] = useState("");
   const [selectedSymbol, setSelectedSymbol] = useState("");
+  const [finaPayload, setFinalPayload] = useState<FinalPreviewSubmitType[]>([]);
 
   useEffect(() => {
     if (selectedSymbol === "") {
@@ -105,20 +105,25 @@ function App() {
     },
   });
 
+  const onSubmitHandler = () => {};
+
   return (
     <div className="p-10">
-      <div className="my-10 flex gap-5">
-        {data.map((item) => (
-          <p
-            onClick={() => setSelectedSymbol(item.symbol)}
-            className={cn(
-              selectedSymbol === item.symbol ? "text-primary" : "",
-              "cursor-pointer"
-            )}
-          >
-            {item.symbol}
-          </p>
-        ))}
+      <div className="flex justify-between">
+        <div className="my-10 flex gap-5">
+          {data.map((item) => (
+            <p
+              onClick={() => setSelectedSymbol(item.symbol)}
+              className={cn(
+                selectedSymbol === item.symbol ? "text-primary" : "",
+                "cursor-pointer"
+              )}
+            >
+              {item.symbol}
+            </p>
+          ))}
+        </div>
+        <Button onClick={onSubmitHandler}>Submit</Button>
       </div>
       <div>
         <ReusableTable table={table} hasActions />
