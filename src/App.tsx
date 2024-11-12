@@ -67,7 +67,9 @@ function App() {
   const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
   const [globalFilter, setGlobalFilter] = useState("");
   const [selectedSymbol, setSelectedSymbol] = useState("");
-  const [finaPayload, setFinalPayload] = useState<FinalPreviewSubmitType[]>([]);
+  const [finaPayload, setFinalPayload] = useState<FinalPreviewSubmitType[]>(
+    data.map((item) => ({ ...item, tradeActionPreviewResponseList: [] }))
+  );
 
   useEffect(() => {
     if (selectedSymbol === "") {
@@ -105,7 +107,9 @@ function App() {
     },
   });
 
-  const onSubmitHandler = () => {};
+  const onSubmitHandler = () => {
+    console.log(finaPayload);
+  };
 
   return (
     <div className="p-10">
